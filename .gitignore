@@ -1,0 +1,6 @@
+/HololensAssistant/*.db
+/HololensAssistant/.vs
+/HololensAssistant/Debug
+/HololensAssistant/ipch
+/HololensAssistant/HololensAssistant/Debug
+/HololensAssistant/WindowsAssistant/Debug
