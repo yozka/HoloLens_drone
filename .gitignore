@@ -7,3 +7,9 @@
 /Source/.vs
 /Source/HolographicDrone/bin
 /Source/HolographicDrone/obj
+/HolographicsAssistant/Platform/HolographicsAssistant_Hololens/.vs
+/HolographicsAssistant/Platform/HolographicsAssistant_Hololens/HolographicsAssistant_Hololens/bin
+/HolographicsAssistant/Platform/HolographicsAssistant_Hololens/HolographicsAssistant_Hololens/obj
+/HolographicsAssistant/Platform/HolographicsAssistant_Desktop/.vs
+/HolographicsAssistant/Platform/HolographicsAssistant_Desktop/HolographicsAssistant_Desktop/obj
+/HolographicsAssistant/Platform/HolographicsAssistant_Desktop/HolographicsAssistant_Desktop/bin
