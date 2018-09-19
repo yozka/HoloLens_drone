@@ -4,3 +4,6 @@
 /HololensAssistant/ipch
 /HololensAssistant/HololensAssistant/Debug
 /HololensAssistant/WindowsAssistant/Debug
+/Source/.vs
+/Source/HolographicDrone/bin
+/Source/HolographicDrone/obj
