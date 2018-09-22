@@ -13,6 +13,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Source\Desktop\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Drone\Hardware\hdControlSignal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Drone\hdDrone.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Drone\hdControlKeyboard.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Drone\hdDroneModel.cs" />

@@ -22,7 +22,16 @@ namespace HolographicsDrone.Drone
                 Component
     {
         ///-------------------------------------------------------------------
+        private const float cSpeedUp    = 2.0f;
+        private const float cSpeedDown  = 2.0f;
+        ///-------------------------------------------------------------------
 
+
+
+
+        ///-------------------------------------------------------------------
+        private readonly Dictionary<Urho.Key, float> mImpulse = new Dictionary<Key, float>();
+        private ADrone mDrone = null; //дрон которым будем управлять
         ///-------------------------------------------------------------------
 
 
@@ -45,7 +54,8 @@ namespace HolographicsDrone.Drone
 
 
 
-         ///-------------------------------------------------------------------
+
+        ///-------------------------------------------------------------------
         ///
         /// <summary>
         /// Обработка кнопок
@@ -54,29 +64,69 @@ namespace HolographicsDrone.Drone
         ///--------------------------------------------------------------------
         protected override void OnUpdate(float timeStep)
         {
-            Input input = Application.Input;
-            const float moveSpeed = 4.0f;
+            impulsKey(Key.W, timeStep);
+            impulsKey(Key.S, timeStep);
+            impulsKey(Key.A, timeStep);
+            impulsKey(Key.D, timeStep);
+
+            if (mDrone == null)
+            {
+                attachDrone();
+                return;
+            }
 
 
-            if (input.GetKeyDown(Key.W))
-            {
-                //cameraNode.Translate(Vector3.UnitY * moveSpeed * timeStep, TransformSpace.Local);
-            }
-            if (input.GetKeyDown(Key.S))
-            {
-                //cameraNode.Translate(new Vector3(0.0f, -1.0f, 0.0f) * moveSpeed * timeStep, TransformSpace.Local);
-            }
-            if (input.GetKeyDown(Key.A))
-            {
-                //cameraNode.Translate(new Vector3(-1.0f, 0.0f, 0.0f) * moveSpeed * timeStep, TransformSpace.Local);
-            }
-            if (input.GetKeyDown(Key.D))
-            {
-                //cameraNode.Translate(Vector3.UnitX * moveSpeed * timeStep, TransformSpace.Local);
-            }
         }
         ///--------------------------------------------------------------------
 
+
+
+
+         ///-------------------------------------------------------------------
+        ///
+        /// <summary>
+        /// Обработка кнопок
+        /// </summary>
+        ///
+        ///--------------------------------------------------------------------
+        private void impulsKey(Key key, float timeStep)
+        {
+            float imp = 0.0f;
+            if (Application.Input.GetKeyDown(key))
+            {
+                //клавишу нажали, идет нарастание импульса
+                imp = cSpeedUp * timeStep;
+            }
+            else
+            {
+                //клавишу отпустили идет спад импульса
+                imp = cSpeedDown * timeStep;
+            }
+
+            
+        }
+        ///--------------------------------------------------------------------
+
+
+
+
+
+         ///-------------------------------------------------------------------
+        ///
+        /// <summary>
+        /// присоеденям дрона к управлению
+        /// </summary>
+        ///
+        ///--------------------------------------------------------------------
+        private void attachDrone()
+        {
+            if (mDrone != null || Node == null)
+            {
+                return;
+            }
+            mDrone = Node.GetComponent<ADrone>();
+        }
+        ///--------------------------------------------------------------------
 
 
 

@@ -3,26 +3,28 @@ using System.Collections.Generic;
 using System.Text;
 using Urho;
 
-namespace HolographicsDrone.Drone
+namespace HolographicsDrone.Drone.Hardware
 {
     ///-------------------------------------------------------------------
-    
+
 
 
 
      ///-------------------------------------------------------------------
     ///
     /// <summary>
-    /// Компанент, который создает дрона
+    /// Сигнал для передачи управления
     /// </summary>
     ///
     ///--------------------------------------------------------------------
-    public class ADrone
-            :
-                Component
+    public class AControlSignal
+
     {
         ///-------------------------------------------------------------------
-
+        public float throttle       { get; set; }
+        public float rudder         { get; set; }
+        public float elevator       { get; set; }
+        public float aileron        { get; set; }
         ///-------------------------------------------------------------------
 
 
@@ -35,33 +37,17 @@ namespace HolographicsDrone.Drone
         /// </summary>
         ///
         ///--------------------------------------------------------------------
-        public ADrone()
+        public AControlSignal()
         {
-            //createModel();
-
+            throttle    = 0f;
+            rudder      = 0f;
+            elevator    = 0f;
+            aileron     = 0f;
         }
         ///--------------------------------------------------------------------
 
 
 
-
-
-         ///-------------------------------------------------------------------
-        ///
-        /// <summary>
-        /// система создание модели
-        /// </summary>
-        ///
-        ///--------------------------------------------------------------------
-        private void createModel()
-        {
-            /*
-            var cache = Application.ResourceCache;
-            var model = Cre CreateComponent<StaticModel>();
-            model.Model = cache.GetModel("robot.mdl");
-            model.SetMaterial(cache.GetMaterial("robot.xml"));*/
-        }
-        ///--------------------------------------------------------------------
 
 
 

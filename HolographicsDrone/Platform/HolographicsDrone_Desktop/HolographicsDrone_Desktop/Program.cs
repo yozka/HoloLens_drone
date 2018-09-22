@@ -210,7 +210,7 @@ namespace HolographicsDrone
                 camera.FarClip = 500.0f;
 
                 // Set an initial position for the camera scene node above the floor
-                mCameraNode.Position = (new Vector3(0.0f, 5.0f, -20.0f));
+                mCameraNode.Position = (new Vector3(0.0f, 2.0f, -10.0f));
 
 
                 Renderer.SetViewport(0, new Viewport(Context, mScene, mCameraNode.GetComponent<Camera>(), null));
@@ -235,6 +235,9 @@ namespace HolographicsDrone
                 drone.CreateComponent<ADrone>();
                 drone.CreateComponent<ADroneModel>();
                 drone.CreateComponent<AControlKeyboard>();
+
+                drone.Position = new Vector3(0, 2, -6.0f);
+                drone.Rotation = new Quaternion(x: 0, y: 0, z: 0);
             }
             ///--------------------------------------------------------------------
 
