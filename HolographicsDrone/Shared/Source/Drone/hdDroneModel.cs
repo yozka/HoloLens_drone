@@ -184,7 +184,9 @@ namespace HolographicsDrone.Drone
         {
             //test.ApplyImpulse(new Vector3(0.1f * timeStep, 1.4f * timeStep, 0));
             //test.ApplyTorqueImpulse(new Vector3(0, 100.6f * timeStep,0));
-            test.ApplyForce(new Vector3(0.0f, 12.5f, 8.5f));
+
+            test.ApplyForce(new Vector3(0.0f, 12.0f, 0.1f), new Vector3(0.0f, 1.0f, 0.0f));
+
             
         }
         ///--------------------------------------------------------------------
