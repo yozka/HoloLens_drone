@@ -7,7 +7,7 @@ using Urho.Physics;
 namespace HolographicsDrone
 {
     using HolographicsDrone.Drone;
-
+    using HolographicsDrone.GUI;
 
 
     class AProgram
@@ -195,7 +195,7 @@ namespace HolographicsDrone
                             // and also adjust friction. The actual mass is not important; only the mass ratios between colliding 
                             // objects are significant
                             RigidBody body = boxNode.CreateComponent<RigidBody>();
-                            body.Mass = 1.0f;
+                            body.Mass = 0.06f;
                             body.Friction = 0.75f;
                             CollisionShape shape = boxNode.CreateComponent<CollisionShape>();
                             shape.SetBox(Vector3.One, Vector3.Zero, Quaternion.Identity);
@@ -232,12 +232,17 @@ namespace HolographicsDrone
             private void createLevel()
             {
                 var drone = mScene.CreateChild("drone");
-                drone.CreateComponent<ADrone>();
-                drone.CreateComponent<ADroneModel>();
-                drone.CreateComponent<AControlKeyboard>();
+                drone.CreateComponent<ADrone>(); //сам дрон, мозги
+                drone.CreateComponent<ADroneModel>(); //модель дрона
+                drone.CreateComponent<AControlKeyboard>(); //управление дроном через клаву
 
                 drone.Position = new Vector3(0, 2, -6.0f);
                 drone.Rotation = new Quaternion(x: 0, y: 0, z: 0);
+
+
+                var gui = new ADebugInformation(drone);
+                gui.SetPosition(20, 20);
+                UI.Root.AddChild(gui);
             }
             ///--------------------------------------------------------------------
 

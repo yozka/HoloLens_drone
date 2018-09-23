@@ -6,6 +6,10 @@ using Urho;
 namespace HolographicsDrone.Drone
 {
     ///-------------------------------------------------------------------
+    using Hardware;
+    ///-------------------------------------------------------------------
+
+
 
 
 
@@ -22,8 +26,8 @@ namespace HolographicsDrone.Drone
                 Component
     {
         ///-------------------------------------------------------------------
-        private const float cSpeedUp    = 2.0f;
-        private const float cSpeedDown  = 2.0f;
+        private const float cSpeedUp    = 500.0f;
+        private const float cSpeedDown  = 800.0f;
         ///-------------------------------------------------------------------
 
 
@@ -64,10 +68,15 @@ namespace HolographicsDrone.Drone
         ///--------------------------------------------------------------------
         protected override void OnUpdate(float timeStep)
         {
-            impulsKey(Key.W, timeStep);
-            impulsKey(Key.S, timeStep);
-            impulsKey(Key.A, timeStep);
-            impulsKey(Key.D, timeStep);
+            impulsKey(Key.Up,       timeStep);
+            impulsKey(Key.Down,     timeStep);
+            impulsKey(Key.Left,     timeStep);
+            impulsKey(Key.Right,    timeStep);
+
+            impulsKey(Key.A,        timeStep);
+            impulsKey(Key.D,        timeStep);
+
+            impulsKeyFixed(Key.W, Key.S,  timeStep);
 
             if (mDrone == null)
             {
@@ -75,7 +84,18 @@ namespace HolographicsDrone.Drone
                 return;
             }
 
+            float elevator  = -mImpulse[Key.Down]   + mImpulse[Key.Up];
+            float aileron   = -mImpulse[Key.Left]   + mImpulse[Key.Right];
+            float rudder    = -mImpulse[Key.A]      + mImpulse[Key.D];
+            float throttle  = -mImpulse[Key.S]      + mImpulse[Key.W];
 
+            var signal = new AControlSignal();
+            signal.throttle = throttle;
+            signal.rudder   = rudder;
+            signal.aileron  = aileron;
+            signal.elevator = elevator;
+
+            mDrone.controlSignal = signal;
         }
         ///--------------------------------------------------------------------
 
@@ -95,23 +115,60 @@ namespace HolographicsDrone.Drone
             if (Application.Input.GetKeyDown(key))
             {
                 //клавишу нажали, идет нарастание импульса
-                imp = cSpeedUp * timeStep;
+                imp = (1.0f / cSpeedUp) * timeStep * 1000.0f;
             }
             else
             {
                 //клавишу отпустили идет спад импульса
-                imp = cSpeedDown * timeStep;
+                imp = -(1.0f / cSpeedDown) * timeStep * 1000.0f;
             }
 
-            
+            float data = mImpulse.ContainsKey(key) ? mImpulse[key] : 0;
+            data += imp;
+            data = MathHelper.Clamp(data, 0, 1);
+            mImpulse[key] = data;
         }
         ///--------------------------------------------------------------------
 
 
 
 
-
          ///-------------------------------------------------------------------
+        ///
+        /// <summary>
+        /// Обработка кнопок без возврата в позицию
+        /// </summary>
+        ///
+        ///--------------------------------------------------------------------
+        private void impulsKeyFixed(Key keyA, Key keyB, float timeStep)
+        {
+            const float speed = 400;
+            float imp = 0.0f;
+            if (Application.Input.GetKeyDown(keyA))
+            {
+                //клавишу нажали, идет нарастание импульса
+                imp = (1.0f / cSpeedUp) * timeStep * speed;
+            }
+            if (Application.Input.GetKeyDown(keyB))
+            {
+                //клавишу отпустили идет спад импульса
+                imp = -(1.0f / cSpeedUp) * timeStep * speed;
+            }
+
+            float data = mImpulse.ContainsKey(keyA) ? mImpulse[keyA] : 0;
+            data += imp;
+            data = MathHelper.Clamp(data, 0, 1);
+            mImpulse[keyA] = data;
+
+
+            mImpulse[keyB] = 0;
+        }
+        ///--------------------------------------------------------------------
+
+
+
+
+        ///-------------------------------------------------------------------
         ///
         /// <summary>
         /// присоеденям дрона к управлению
