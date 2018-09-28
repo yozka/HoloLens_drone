@@ -131,13 +131,9 @@ namespace HolographicsDrone.Drone
             mRigidBody = main.CreateComponent<RigidBody>();
             
 
-            //mRigidBody.Mass = 0.0f;
-            //mRigidBody.Friction = 1.0f;
 
             mRigidBody.Mass = 1.0f;
-            //mRigidBody.Kinematic = false;
-            //mRigidBody.SetLinearFactor(new Vector3(0, 1.0f, 0));
-            //mRigidBody.SetAngularFactor(Vector3.Up);
+            
 
             CollisionShape shape = main.CreateComponent<CollisionShape>();
             shape.SetBox(new Vector3(1.0f, 0.1f, 1.0f), Vector3.Zero, Quaternion.Identity);

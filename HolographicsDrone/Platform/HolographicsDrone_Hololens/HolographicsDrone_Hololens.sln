@@ -5,7 +5,13 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HolographicsDrone_Hololens", "HolographicsDrone_Hololens\HolographicsDrone_Hololens.csproj", "{98FC9FF3-12A0-488A-B62E-F76DD0A0515F}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "HolographicsDrone", "..\..\Shared\HolographicsDrone.shproj", "{E75F3361-388F-4B61-A014-CA1702C831FF}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\..\Shared\HolographicsDrone.projitems*{98fc9ff3-12a0-488a-b62e-f76dd0a0515f}*SharedItemsImports = 4
+		..\..\Shared\HolographicsDrone.projitems*{e75f3361-388f-4b61-a014-ca1702c831ff}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86

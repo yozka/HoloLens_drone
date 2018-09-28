@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Timers;
 using Urho.Gui;
 using Urho;
 
@@ -34,7 +33,6 @@ namespace HolographicsDrone.GUI
         private readonly Text mLabelGyro = null; //гироскоп квадрика
         private readonly Text mLabelPID = null; //гироскоп квадрика
 
-        private readonly Timer mTimerUpdate = null;
         ///-------------------------------------------------------------------
 
 

@@ -36,7 +36,7 @@ namespace HolographicsDrone.Drone.Hardware
         {
             var motor = new AMotor();
 
-            motor.power         = 0.04f;
+            motor.power         = 0.040f;
             motor.yawFactor     = 0.01f;
 
             return motor;
