@@ -85,25 +85,24 @@ namespace HolographicsDrone.GUI
             AddChild(mLabelPID);
 
 
-            mTimerUpdate = new Timer(30);
-            mTimerUpdate.Elapsed += onTimedUpdate;
-            mTimerUpdate.AutoReset = true;
-            mTimerUpdate.Enabled = true;
-        }
+            Application.Current.Engine.SubscribeToPostUpdate(args=> { onUpdate(args.TimeStep); });
+
+           }
         ///--------------------------------------------------------------------
 
 
+        
 
 
 
-        ///-------------------------------------------------------------------
+         ///-------------------------------------------------------------------
         ///
         /// <summary>
         /// обновление информации
         /// </summary>
         ///
         ///--------------------------------------------------------------------
-        private void onTimedUpdate(Object source, System.Timers.ElapsedEventArgs e)
+        private void onUpdate(float TimeStep)
         {
             string sv = "Not drone";
             string sg = "Not gyro";

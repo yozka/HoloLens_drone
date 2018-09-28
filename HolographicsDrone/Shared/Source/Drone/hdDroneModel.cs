@@ -154,8 +154,8 @@ namespace HolographicsDrone.Drone
 
 
             //винты
-            const float shift = 0.5f;
-            const float top = 0.5f;
+            const float shift = 0.4f;
+            const float top = 0.03f;
 
             /*
             mMotors[EMotor.frontLeft]   = createMotor(new Vector3(-shift,  top,  shift),    main, Color.Green);

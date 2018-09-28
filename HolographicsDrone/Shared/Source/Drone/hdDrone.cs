@@ -385,7 +385,7 @@ namespace HolographicsDrone.Drone
             const float zeroYaw = 0.001f;
             if (Math.Abs(yaw - zeroYaw) > zeroYaw)
             {
-                //rb.ApplyTorque(Vector3.Up * (float)yaw);
+                rb.ApplyTorqueImpulse(Node.WorldUp * (float)yaw);
             }
 
 
