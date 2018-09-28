@@ -31,6 +31,8 @@ namespace HolographicsDrone.GUI
         private readonly Node mDrone = null;
 
         private readonly Text mLabelSignal = null; //джойстик
+        private readonly Text mLabelGyro = null; //гироскоп квадрика
+        private readonly Text mLabelPID = null; //гироскоп квадрика
 
         private readonly Timer mTimerUpdate = null;
         ///-------------------------------------------------------------------
@@ -67,7 +69,23 @@ namespace HolographicsDrone.GUI
             AddChild(mLabelSignal);
 
 
-            mTimerUpdate = new Timer(100);
+            mLabelGyro = new Text();
+            mLabelGyro.Value = "[error]";
+            mLabelGyro.SetColor(Color.Black);
+            mLabelGyro.SetFont(font: cache.GetFont("Fonts/Anonymous Pro.ttf"), size: 20);
+            mLabelGyro.SetPosition(0, 170 );
+            AddChild(mLabelGyro);
+
+
+            mLabelPID = new Text();
+            mLabelPID.Value = "[error]";
+            mLabelPID.SetColor(Color.Red);
+            mLabelPID.SetFont(font: cache.GetFont("Fonts/Anonymous Pro.ttf"), size: 20);
+            mLabelPID.SetPosition(0, 320);
+            AddChild(mLabelPID);
+
+
+            mTimerUpdate = new Timer(30);
             mTimerUpdate.Elapsed += onTimedUpdate;
             mTimerUpdate.AutoReset = true;
             mTimerUpdate.Enabled = true;
@@ -88,18 +106,38 @@ namespace HolographicsDrone.GUI
         private void onTimedUpdate(Object source, System.Timers.ElapsedEventArgs e)
         {
             string sv = "Not drone";
+            string sg = "Not gyro";
+            string sp = "Not pid";
             var drone = mDrone.GetComponent<ADrone>();
             if (drone != null)
             {
                 var signal = drone.controlSignal;
                 if (signal != null)
                 {
-                    sv =  "Throttle: " + signal.throttle + "\n";
-                    sv += "  Rudder: " + signal.rudder + "\n";
-                    sv += "Elevator: " + signal.elevator + "\n";
-                    sv += " Aileron: " + signal.aileron;
+                    sv =  "        Throttle: " + signal.throttle.ToString("0.00") + "\n";
+                    sv += "  Aileron / Roll: " + signal.aileron.ToString("0.00") + "\n";
+                    sv += "Elevator / Pitch: " + signal.elevator.ToString("0.00") + "\n";
+                    sv += "    Rudder / Yaw: " + signal.rudder.ToString("0.00");
                 }
 
+                var gyro = drone.gyro;
+                if (gyro != null)
+                {
+                    sg = "---Gyro-----\n";
+                    sg += " Roll: " + gyro.roll.ToString("0.00") + "\n";
+                    sg += "Pitch: " + gyro.pitch.ToString("0.00") + "\n";
+                    sg += "  Yaw: " + gyro.yaw.ToString("0.00") + "\n";
+                    sg += "Velty: " + gyro.velocityVector.Y.ToString("0.0000");
+                }
+
+                var comp = drone.computer;
+                if (comp != null)
+                {
+                    sp = "---PID-----\n";
+                    sp += " Roll: " + comp.rollCorrection.ToString("0.00") + "\n";
+                    sp += "Pitch: " + comp.pitchCorrection.ToString("0.00") + "\n";
+                    sp += "Throt: " + comp.throttle.ToString("0.00");
+                }
 
                 /*
                 rollP.text = string.Format("{0}", drone.GetComponent<FC>().rollPID[0].ToString("0.00"));
@@ -116,13 +154,14 @@ namespace HolographicsDrone.GUI
                 */
             }
             mLabelSignal.Value = sv;
-
+            mLabelGyro.Value = sg;
+            mLabelPID.Value = sp;
         }
         ///--------------------------------------------------------------------
 
 
 
-
+ 
 
 
 

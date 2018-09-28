@@ -21,10 +21,10 @@ namespace HolographicsDrone.Drone.Hardware
 
     {
         ///-------------------------------------------------------------------
-        public float throttle       { get; set; }
-        public float rudder         { get; set; }
-        public float elevator       { get; set; }
-        public float aileron        { get; set; }
+        public float throttle       { get; set; }   //газ
+        public float rudder         { get; set; }   //рысканье YAW
+        public float elevator       { get; set; }   //Тангаж Pitch
+        public float aileron        { get; set; }   //крен roll
         ///-------------------------------------------------------------------
 
 
@@ -47,11 +47,43 @@ namespace HolographicsDrone.Drone.Hardware
         ///--------------------------------------------------------------------
 
 
+        public float pitch //тангаж
+        {
+            get
+            {
+                return elevator;
+            }
+            set
+            {
+                elevator = value;
+            }
+        }
 
 
 
+        public float roll //крен
+        {
+            get
+            {
+                return aileron;
+            }
+            set
+            {
+                aileron = value;
+            }
+        }
 
-
+        public float yaw //крен
+        {
+            get
+            {
+                return rudder;
+            }
+            set
+            {
+                rudder = value;
+            }
+        }
 
     }
 }

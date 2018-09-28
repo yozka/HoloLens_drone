@@ -14,11 +14,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Source\Drone\Hardware\hdControlSignal.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Source\Drone\Hardware\hdFlightSystem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Drone\Hardware\hdComputerModule.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Drone\Hardware\hdBasicGyro.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Drone\Hardware\hdCreatorMotors.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Drone\Hardware\hdMotor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Drone\Hardware\hdPID.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Drone\Hardware\hdPID_extendent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Drone\hdControlGamePad.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Drone\hdDrone.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Drone\hdControlKeyboard.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Drone\hdDroneModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\GUI\hdDebugInformation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Utils\Mathf.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Data\Models\Box.mdl">

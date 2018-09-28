@@ -97,16 +97,60 @@ namespace HolographicsDrone
                 UI.Root.AddChild(helloText);
                 */
 
-                              
-                           
 
 
+                Engine.SubscribeToPostRenderUpdate(args => { render(); });
+  
+
+
+
+                mScene.GetOrCreateComponent<PhysicsWorld>();
+                mScene.GetOrCreateComponent<DebugRenderer>();
 
             }
             ///--------------------------------------------------------------------
 
 
+            
+            protected void render ()
+            {
+                // Default debug rendering.
+                Renderer.DrawDebugGeometry(false);
 
+                // Use debug renderer to output physics world debug.
+                
+                var debugRenderer = mScene.GetComponent<DebugRenderer>();
+                var physicsComp = mScene.GetComponent<PhysicsWorld>();
+                if (physicsComp != null)
+                {
+                    physicsComp.DrawDebugGeometry(debugRenderer, false);
+                }
+
+                //отрисуем точки
+
+                var list = mScene.GetChildrenWithComponent<Urho.Shapes.Box>(true);
+                foreach (var node in list)
+                {
+                    Vector3 thrust = node.WorldUp;
+                    thrust.Normalize();
+                    var pos = node.WorldPosition;
+
+                    Vector3 start = pos;
+                    Vector3 end = pos + thrust;
+                    debugRenderer.AddLine(start, end, Color.White, false);
+                    
+                }
+
+
+
+                /*
+                var upperBound = new Vector3(-4.0f, 2.0f, 0.0f);
+                var lowerBound = new Vector3(4.0f, -2.0f, 0.0f);
+                debugRenderer.AddBoundingBox(
+                    new BoundingBox(upperBound, lowerBound),
+                    Color.White,
+                    false);*/
+            }
 
 
 
@@ -127,7 +171,8 @@ namespace HolographicsDrone
                 // exist before creating drawable components, the PhysicsWorld must exist before creating physics components.
                 // Finally, create a DebugRenderer component so that we can draw physics debug geometry
                 mScene.CreateComponent<Octree>();
-                mScene.CreateComponent<PhysicsWorld>();
+                var physics = mScene.CreateComponent<PhysicsWorld>();
+                //physics.SetGravity(Vector3.Zero);
                // mScene.CreateComponent<DebugRenderer>();
 
                 // Create a Zone component for ambient lighting & fog control
@@ -210,8 +255,10 @@ namespace HolographicsDrone
                 camera.FarClip = 500.0f;
 
                 // Set an initial position for the camera scene node above the floor
-                mCameraNode.Position = (new Vector3(0.0f, 2.0f, -10.0f));
+                mCameraNode.Position = (new Vector3(0.0f, 2.0f, -12.0f));
 
+                mCameraNode.Position = (new Vector3(0.0f, 8.0f, -15.0f));
+                mCameraNode.Rotation = new Quaternion(30, 0, 0);
 
                 Renderer.SetViewport(0, new Viewport(Context, mScene, mCameraNode.GetComponent<Camera>(), null));
             }
@@ -234,15 +281,18 @@ namespace HolographicsDrone
                 var drone = mScene.CreateChild("drone");
                 drone.CreateComponent<ADrone>(); //сам дрон, мозги
                 drone.CreateComponent<ADroneModel>(); //модель дрона
-                drone.CreateComponent<AControlKeyboard>(); //управление дроном через клаву
+                drone.CreateComponent<AControlGamePad>(); //управление дроном через клаву
 
-                drone.Position = new Vector3(0, 2, -6.0f);
+                drone.Position = new Vector3(0, 5, -6.0f);
                 drone.Rotation = new Quaternion(x: 0, y: 0, z: 0);
 
 
                 var gui = new ADebugInformation(drone);
                 gui.SetPosition(20, 20);
                 UI.Root.AddChild(gui);
+
+
+
             }
             ///--------------------------------------------------------------------
 

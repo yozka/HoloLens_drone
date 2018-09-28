@@ -7,6 +7,7 @@ namespace HolographicsDrone.Drone
 {
     ///-------------------------------------------------------------------
     using Hardware;
+    using Utils;
     ///-------------------------------------------------------------------
 
 
@@ -89,13 +90,12 @@ namespace HolographicsDrone.Drone
             float rudder    = -mImpulse[Key.A]      + mImpulse[Key.D];
             float throttle  = -mImpulse[Key.S]      + mImpulse[Key.W];
 
-            var signal = new AControlSignal();
+            var signal = mDrone.controlSignal;
             signal.throttle = throttle;
             signal.rudder   = rudder;
             signal.aileron  = aileron;
             signal.elevator = elevator;
 
-            mDrone.controlSignal = signal;
         }
         ///--------------------------------------------------------------------
 
