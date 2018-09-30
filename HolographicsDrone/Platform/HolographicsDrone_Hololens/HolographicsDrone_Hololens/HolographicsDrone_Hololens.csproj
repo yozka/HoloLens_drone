@@ -7,8 +7,8 @@
     <ProjectGuid>{98FC9FF3-12A0-488A-B62E-F76DD0A0515F}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HolographicsAssistant</RootNamespace>
-    <AssemblyName>HolographicsAssistant</AssemblyName>
+    <RootNamespace>HolographicsDrone</RootNamespace>
+    <AssemblyName>Drone</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
@@ -66,8 +66,9 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Source\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\World\hhWorldSurface.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

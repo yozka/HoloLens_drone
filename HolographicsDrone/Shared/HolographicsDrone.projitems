@@ -9,6 +9,7 @@
     <Import_RootNamespace>HolographicsDrone</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Data\Models\" />
     <Folder Include="$(MSBuildThisFileDirectory)Data\Techniques\" />
     <Folder Include="$(MSBuildThisFileDirectory)Source\Desktop\" />
   </ItemGroup>
@@ -25,46 +26,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)Source\Drone\hdControlKeyboard.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Drone\hdDroneModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\GUI\hdDebugInformation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\GUI\HUD\hdMainHUD.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Utils\Mathf.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)Data\Models\Box.mdl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MSBuildThisFileDirectory)Data\Models\Mutant.mdl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)Data\Materials\Skybox.xml">
+    <Content Include="$(MSBuildThisFileDirectory)Data\Materials\scanning_grid.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="$(MSBuildThisFileDirectory)Data\Materials\StoneEnvMapSmall.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="$(MSBuildThisFileDirectory)Data\Materials\StoneTiled.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="$(MSBuildThisFileDirectory)Data\Textures\BrightDay1_NegX.dds">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="$(MSBuildThisFileDirectory)Data\Textures\BrightDay1_NegY.dds">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="$(MSBuildThisFileDirectory)Data\Textures\BrightDay1_NegZ.dds">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="$(MSBuildThisFileDirectory)Data\Textures\BrightDay1_PosX.dds">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="$(MSBuildThisFileDirectory)Data\Textures\BrightDay1_PosY.dds">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="$(MSBuildThisFileDirectory)Data\Textures\BrightDay1_PosZ.dds">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="$(MSBuildThisFileDirectory)Data\Textures\Skybox.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="$(MSBuildThisFileDirectory)Data\Textures\scanning_grid.dds">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="$(MSBuildThisFileDirectory)Data\Textures\StoneDiffuse.dds">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
