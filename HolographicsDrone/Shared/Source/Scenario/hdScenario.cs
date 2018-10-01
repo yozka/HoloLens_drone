@@ -92,6 +92,8 @@ namespace HolographicsDrone.Scenario
 
             mDrone.CreateComponent<ADrone>(); //модель дрона
             mDrone.CreateComponent<ADroneModel>(); //модель дрона
+
+            mDrone.CreateComponent<AControlGamePad>();
             mDrone.CreateComponent<AControlBluetoothJoy>(); //управление дроном через клаву
         }
         ///--------------------------------------------------------------------

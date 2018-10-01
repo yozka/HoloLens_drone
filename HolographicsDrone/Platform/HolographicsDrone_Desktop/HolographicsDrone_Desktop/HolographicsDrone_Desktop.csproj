@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Workflow.Runtime" />
     <Reference Include="Urho, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UrhoSharp.1.8.93\lib\net45\Urho.dll</HintPath>
       <Private>True</Private>

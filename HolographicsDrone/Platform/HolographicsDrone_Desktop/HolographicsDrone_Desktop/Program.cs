@@ -2,7 +2,7 @@
 using Urho;
 using Urho.Desktop;
 using Urho.Physics;
-
+using Urho.Shapes;
 
 namespace HolographicsDrone
 {
@@ -197,20 +197,23 @@ namespace HolographicsDrone
                 // Create skybox. The Skybox component is used like StaticModel, but it will be always located at the camera, giving the
                 // illusion of the box planes being far away. Use just the ordinary Box model and a suitable material, whose shader will
                 // generate the necessary 3D texture coordinates for cube mapping
+                /*
                 Node skyNode = mScene.CreateChild("Sky");
                 skyNode.SetScale(500.0f); // The scale actually does not matter
                 Skybox skybox = skyNode.CreateComponent<Skybox>();
                 skybox.Model = cache.GetModel("Models/Box.mdl");
-                skybox.SetMaterial(cache.GetMaterial("Materials/Skybox.xml"));
+                skybox.SetMaterial(cache.GetMaterial("Materials/Skybox.xml"));*/
 
                 {
                     // Create a floor object, 1000 x 1000 world units. Adjust position so that the ground is at zero Y
                     Node floorNode = mScene.CreateChild("Floor");
                     floorNode.Position = new Vector3(0.0f, -0.5f, 0.0f);
                     floorNode.Scale = new Vector3(1000.0f, 1.0f, 1000.0f);
-                    StaticModel floorObject = floorNode.CreateComponent<StaticModel>();
-                    floorObject.Model = cache.GetModel("Models/Box.mdl");
-                    floorObject.SetMaterial(cache.GetMaterial("Materials/StoneTiled.xml"));
+                    var floorObject = floorNode.CreateComponent<Box>();
+                    floorObject.Color = Color.Gray;
+                    
+                    //floorObject.Model = cache.GetModel("Models/Box.mdl");
+                    //floorObject.SetMaterial(cache.GetMaterial("Materials/StoneTiled.xml"));
 
                     // Make the floor physical by adding RigidBody and CollisionShape components. The RigidBody's default
                     // parameters make the object static (zero mass.) Note that a CollisionShape by itself will not participate
@@ -223,6 +226,7 @@ namespace HolographicsDrone
                     shape.SetBox(Vector3.One, Vector3.Zero, Quaternion.Identity);
                 }
 
+     
                 {
                     // Create a pyramid of movable physics objects
                     for (int y = 0; y < 8; ++y)
@@ -231,9 +235,10 @@ namespace HolographicsDrone
                         {
                             Node boxNode = mScene.CreateChild("Box");
                             boxNode.Position = new Vector3((float)x, -(float)y + 8.0f, 0.0f);
-                            StaticModel boxObject = boxNode.CreateComponent<StaticModel>();
-                            boxObject.Model = cache.GetModel("Models/Box.mdl");
-                            boxObject.SetMaterial(cache.GetMaterial("Materials/StoneEnvMapSmall.xml"));
+                            var boxObject = boxNode.CreateComponent<Box>();
+                            boxObject.Color = Color.Blue;
+                            //boxObject.Model = cache.GetModel("Models/Box.mdl");
+                            //boxObject.SetMaterial(cache.GetMaterial("Materials/StoneEnvMapSmall.xml"));
                             boxObject.CastShadows = true;
 
                             // Create RigidBody and CollisionShape components like above. Give the RigidBody mass to make it movable

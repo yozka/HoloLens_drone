@@ -66,6 +66,8 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Source\Devices\hdBluetoothJoy.cs" />
+    <Compile Include="Source\Devices\hdControlBluetoothJoy.cs" />
     <Compile Include="Source\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\World\hhWorldSurface.cs" />
