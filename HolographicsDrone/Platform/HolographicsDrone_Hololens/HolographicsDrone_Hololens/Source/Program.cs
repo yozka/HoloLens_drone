@@ -36,9 +36,9 @@ using Urho.Urho2D;
 namespace HolographicsDrone
 {
     ///--------------------------------------------------------------------
-    using HolographicsDrone.Drone;
     using HolographicsDrone.World;
     using HolographicsDrone.GUI;
+    using HolographicsDrone.Scenario;
     ///--------------------------------------------------------------------
 
 
@@ -105,10 +105,6 @@ namespace HolographicsDrone
     public class AApplication : StereoApplication
     {
         ///--------------------------------------------------------------------
-        Node mDrone;
-
-        ///--------------------------------------------------------------------
-
 
 
 
@@ -151,6 +147,8 @@ namespace HolographicsDrone
             var hud = Scene.GetOrCreateComponent<AMainHUD>();
             //
 
+            //создаем менеджер дрона
+            var scenario = Scene.GetOrCreateComponent<AScenario>();
 
 
             //создаем мир
@@ -161,23 +159,12 @@ namespace HolographicsDrone
             //прикрутим управляющие сигналы
             world.signal_startScanning  += hud.startScanning;
             world.signal_stopScanning   += hud.stopScanning;
+            world.signal_stopScanning   += scenario.home;
 
-            
             //
 
+            //scenario.home();
 
-
-
-            mDrone = Scene.CreateChild("drone");
-            mDrone.Position = new Vector3(0, 1, 0.0f); //1.5m away
-            mDrone.SetScale(0.2f); //D=30cm
-
-            mDrone.CreateComponent<ADrone>(); //модель дрона
-            mDrone.CreateComponent<ADroneModel>(); //модель дрона
-            mDrone.CreateComponent<AControlGamePad>(); //управление дроном через клаву
-
-
- 
 
 
            
@@ -270,8 +257,16 @@ namespace HolographicsDrone
     */
 
 
+            /*
             var world = Scene.GetOrCreateComponent<AWorld>();
             world.startScanning();
+            */
+
+            var scenario = Scene.GetComponent<AScenario>();
+            if (scenario != null)
+            {
+                scenario.home();
+            }
         }
         ///--------------------------------------------------------------------
 

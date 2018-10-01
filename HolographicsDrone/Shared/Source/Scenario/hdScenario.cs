@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using Urho;
 
-namespace HolographicsDrone.Drone.Hardware
+namespace HolographicsDrone.Scenario
 {
     ///-------------------------------------------------------------------
-
+    using HolographicsDrone.Drone;
+    using Utils;
     ///-------------------------------------------------------------------
 
 
@@ -15,32 +18,36 @@ namespace HolographicsDrone.Drone.Hardware
      ///-------------------------------------------------------------------
     ///
     /// <summary>
-    /// Система создания мотора
+    /// Сценарий взаимодействия квадракоптера
     /// </summary>
     ///
     ///--------------------------------------------------------------------
-    public class ACreatorMotor
+    public class AScenario
+            :
+                Component
     {
-        ///--------------------------------------------------------------------
+        ///-------------------------------------------------------------------
+        private Node mDrone = null;
+
+
+
+        ///-------------------------------------------------------------------
+        ///-------------------------------------------------------------------
+
+
 
 
 
          ///-------------------------------------------------------------------
         ///
         /// <summary>
-        /// Создание общего мотора
+        /// Constructor
         /// </summary>
         ///
         ///--------------------------------------------------------------------
-        public AMotor createMotor()
+        public AScenario()
         {
-            var motor = new AMotor();
-
-            //motor.power         = 0.040f;
-            motor.power = 0.0500f;
-            motor.yawFactor     = 0.01f;
-
-            return motor;
+            ReceiveSceneUpdates = true;
         }
         ///--------------------------------------------------------------------
 
@@ -48,46 +55,18 @@ namespace HolographicsDrone.Drone.Hardware
 
 
 
-         ///-------------------------------------------------------------------
-        ///
-        /// <summary>
-        /// Создание мотора
-        /// </summary>
-        ///
-        ///--------------------------------------------------------------------
-        public AMotor frontLeft()
-        {
-            var motor = createMotor();
-            motor.typeMotor = EMotor.frontLeft;
-
- 
-            motor.pitchFactor   =  0.005f;
-            motor.rollFactor    = -0.005f;
-            motor.invertDirection = false;
-
-            return motor;
-        }
-        ///--------------------------------------------------------------------
-
-
 
          ///-------------------------------------------------------------------
         ///
         /// <summary>
-        /// Создание мотора
+        /// Обработка
         /// </summary>
         ///
         ///--------------------------------------------------------------------
-        public AMotor frontRight()
+        protected override void OnUpdate(float timeStep)
         {
-            var motor = createMotor();
-            motor.typeMotor = EMotor.frontRight;
+            
 
-            motor.pitchFactor       =  0.005f;
-            motor.rollFactor        =  0.005f;
-            motor.invertDirection   = true;
-
-            return motor;
         }
         ///--------------------------------------------------------------------
 
@@ -97,23 +76,25 @@ namespace HolographicsDrone.Drone.Hardware
          ///-------------------------------------------------------------------
         ///
         /// <summary>
-        /// Создание мотора
+        /// создание и получение квадрика
         /// </summary>
         ///
         ///--------------------------------------------------------------------
-        public AMotor rearLeft()
+        private void createDrone()
         {
-            var motor = createMotor();
-            motor.typeMotor = EMotor.rearLeft;
+            if (mDrone != null)
+            {
+                return;
+            }
 
-            motor.pitchFactor   = -0.005f;
-            motor.rollFactor    = -0.005f;
-            motor.invertDirection = true;
+            mDrone = Scene.CreateChild("drone");
+            mDrone.SetScale(0.2f); //D=30cm
 
-            return motor;
+            mDrone.CreateComponent<ADrone>(); //модель дрона
+            mDrone.CreateComponent<ADroneModel>(); //модель дрона
+            mDrone.CreateComponent<AControlBluetoothJoy>(); //управление дроном через клаву
         }
         ///--------------------------------------------------------------------
-
 
 
 
@@ -121,22 +102,36 @@ namespace HolographicsDrone.Drone.Hardware
          ///-------------------------------------------------------------------
         ///
         /// <summary>
-        /// Создание мотора
+        /// переход в домашнию точку
         /// </summary>
         ///
         ///--------------------------------------------------------------------
-        public AMotor rearRight()
+        public void home()
         {
-            var motor = createMotor();
-            motor.typeMotor = EMotor.rearRight;
+            createDrone();
+            mDrone.Position = new Vector3(0.0f, 1.0f, 0.0f);
 
-            motor.pitchFactor       = -0.005f;
-            motor.rollFactor        =  0.005f;
-            motor.invertDirection = false;
-
-            return motor;
         }
         ///--------------------------------------------------------------------
+
+
+
+
+        ///-------------------------------------------------------------------
+        ///
+        /// <summary>
+        /// присоеденям дрона к управлению
+        /// </summary>
+        ///
+        ///--------------------------------------------------------------------
+        private void attachDrone()
+        {
+            
+        }
+        ///--------------------------------------------------------------------
+
+
+
 
     }
 }
