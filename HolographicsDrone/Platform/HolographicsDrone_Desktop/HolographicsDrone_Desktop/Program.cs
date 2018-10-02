@@ -255,7 +255,7 @@ namespace HolographicsDrone
 
                 // Create the camera. Limit far clip distance to match the fog. Note: now we actually create the camera node outside
                 // the scene, because we want it to be unaffected by scene load / save
-                mCameraNode = new Node();
+                mCameraNode = mScene.CreateChild();
                 Camera camera = mCameraNode.CreateComponent<Camera>();
                 camera.FarClip = 500.0f;
 
@@ -265,7 +265,10 @@ namespace HolographicsDrone
                 mCameraNode.Position = (new Vector3(0.0f, 8.0f, -15.0f));
                 mCameraNode.Rotation = new Quaternion(30, 0, 0);
 
-                Renderer.SetViewport(0, new Viewport(Context, mScene, mCameraNode.GetComponent<Camera>(), null));
+                Renderer.SetViewport(0, new Viewport(Context, mScene, camera, null));
+
+
+                mScene.GetOrCreateComponent<AMainHUD>();
             }
             ///--------------------------------------------------------------------
 
@@ -287,6 +290,7 @@ namespace HolographicsDrone
                 drone.CreateComponent<ADrone>(); //сам дрон, мозги
                 drone.CreateComponent<ADroneModel>(); //модель дрона
                 drone.CreateComponent<AControlGamePad>(); //управление дроном через клаву
+                drone.CreateComponent<AMarkerAnhor>(); //якорь указывающий где находится дрон
 
                 drone.Position = new Vector3(0, 5, -6.0f);
                 drone.Rotation = new Quaternion(x: 0, y: 0, z: 0);

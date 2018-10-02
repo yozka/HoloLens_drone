@@ -27,7 +27,7 @@ namespace HolographicsDrone.Scenario
                 Component
     {
         ///-------------------------------------------------------------------
-        private Node mDrone = null;
+        protected Node mDrone = null;
 
 
 
@@ -93,15 +93,31 @@ namespace HolographicsDrone.Scenario
             mDrone.CreateComponent<ADrone>(); //модель дрона
             mDrone.CreateComponent<ADroneModel>(); //модель дрона
 
-            mDrone.CreateComponent<AControlGamePad>();
-            mDrone.CreateComponent<AControlBluetoothJoy>(); //управление дроном через клаву
+            onCreateDrone();
         }
         ///--------------------------------------------------------------------
 
 
 
 
+
          ///-------------------------------------------------------------------
+        ///
+        /// <summary>
+        /// переход в домашнию точку
+        /// </summary>
+        ///
+        ///--------------------------------------------------------------------
+        protected virtual void onCreateDrone()
+        {
+            
+
+        }
+        ///--------------------------------------------------------------------
+
+
+
+        ///-------------------------------------------------------------------
         ///
         /// <summary>
         /// переход в домашнию точку

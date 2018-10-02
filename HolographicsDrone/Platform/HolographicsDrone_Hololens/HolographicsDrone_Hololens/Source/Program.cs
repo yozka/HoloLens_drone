@@ -147,7 +147,7 @@ namespace HolographicsDrone
             //
 
             //создаем менеджер дрона
-            var scenario = Scene.GetOrCreateComponent<AScenario>();
+            var scenario = Scene.GetOrCreateComponent<AScenarioHololens>();
 
 
             //создаем мир
@@ -163,16 +163,6 @@ namespace HolographicsDrone
             //
 
          
-
-
-
-
-
-
-
-
-
-
             //Scene.GetOrCreateComponent<DebugRenderer>();Engine.PostRenderUpdate += debugRender;
 
 
