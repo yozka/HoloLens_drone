@@ -171,6 +171,7 @@ namespace HolographicsDrone
 
             world.createEnvironment();
             scenario.home();
+
             //world.startScanning();
         }
         ///--------------------------------------------------------------------

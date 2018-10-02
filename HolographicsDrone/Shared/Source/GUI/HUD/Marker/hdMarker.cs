@@ -85,26 +85,42 @@ namespace HolographicsDrone.GUI
 
             var pos = mAnhor.Node.WorldPosition;
 
-            var ptB = mCamera.WorldToScreenPoint(pos);
+
+
+
+            
+
+            var posCenter = mCamera.ScreenToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
+
+            var posDest = pos - posCenter;
+            posDest.Normalize();
+
+            var posB = posCenter + posDest;
+
+            var ptB = mCamera.WorldToScreenPoint(posB);
             Vector2 ptA = new Vector2(0.5f, 0.5f);
 
 
-             
+            Vector2 pt = ptB;
 
 
-            Vector2 pt = MathHelperExt.intersect(ptB);
-     
-            
+            //Vector2 pt = MathHelperExt.intersect(ptB);
 
-            var angle = Math.Atan2(pt.Y , pt.X);
+            const float margin = 0.1f;
+            pt.X = MathHelper.Clamp(pt.X, margin, 1.0f - margin);
+            pt.Y = MathHelper.Clamp(pt.Y, margin, 1.0f - margin);
+
+
+
+            var angle = Math.Atan2(pt.Y , pt.X) - Math.PI / 4;
 
             var sizeScreen = Root.Size;
             Position =  new IntVector2((int)(pt.X * sizeScreen.X), (int)(pt.Y * sizeScreen.Y));
 
             //Position = new IntVector2(sizeScreen.X / 2, sizeScreen.Y / 2);
-            //Rotation = (float)((angle * 180.0f) / Math.PI);
+            Rotation = (float)((angle * 180.0f) / Math.PI);
 
-            Console.WriteLine(pt);
+            //Console.WriteLine(ptB);
     
         }
         ///--------------------------------------------------------------------

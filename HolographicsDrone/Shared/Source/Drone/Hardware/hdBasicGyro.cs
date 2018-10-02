@@ -101,7 +101,7 @@ namespace HolographicsDrone.Drone.Hardware
 
             mGyroPitch = normal(mGyroPitch);
             mGyroRoll = normalRoll(mGyroRoll);
-            mGyroYaw = normal(mGyroYaw);
+            mGyroYaw = normalYaw(mGyroYaw);
 
 
             /*
@@ -182,6 +182,33 @@ namespace HolographicsDrone.Drone.Hardware
                 val -= 360;
             }
   
+
+            return val;
+        }
+        ///--------------------------------------------------------------------
+
+
+
+
+         ///-------------------------------------------------------------------
+        ///
+        /// <summary>
+        /// возврат
+        /// </summary>
+        ///
+        ///--------------------------------------------------------------------
+        public float normalYaw(float val)
+        {
+            if (val > 90 && val < 270)
+            {
+                val -= 180;
+            }
+
+            if (val > 270 && val < 360)
+            {
+                val -= 360;
+            }
+
 
             return val;
         }

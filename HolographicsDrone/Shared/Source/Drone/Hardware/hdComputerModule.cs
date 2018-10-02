@@ -87,7 +87,7 @@ namespace HolographicsDrone.Drone.Hardware
             heightCorrection    = pidThrottle.update(controlHeight, gyro.velocityVector.Y, time);
             */
 
-            //yawCorrection = controlYaw;
+            //yawCorrection = controlYaw * timeFrame;
 
 
             //

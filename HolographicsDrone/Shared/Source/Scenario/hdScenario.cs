@@ -8,6 +8,7 @@ namespace HolographicsDrone.Scenario
     ///-------------------------------------------------------------------
     using HolographicsDrone.Drone;
     using Utils;
+    using HolographicsDrone.GUI;
     ///-------------------------------------------------------------------
 
 
@@ -92,6 +93,7 @@ namespace HolographicsDrone.Scenario
 
             mDrone.CreateComponent<ADrone>(); //модель дрона
             mDrone.CreateComponent<ADroneModel>(); //модель дрона
+            mDrone.CreateComponent<AMarkerAnhor>(); //привязка маркера
 
             onCreateDrone();
         }
