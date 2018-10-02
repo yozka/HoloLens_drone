@@ -59,7 +59,7 @@ namespace HolographicsDrone.GUI
 
             // Set random color and additive blending mode
             SetColor(Color.Red);
-            BlendMode = BlendMode.Addalpha;
+            BlendMode = BlendMode.MaxBlendmodes;
         }
         ///--------------------------------------------------------------------
 
@@ -83,44 +83,51 @@ namespace HolographicsDrone.GUI
                 return;
             }
 
-            var pos = mAnhor.Node.WorldPosition;
+            var pos = mAnhor.Node.WorldPosition; //позиция объекта
+            var posCenter = mCamera.ScreenToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f)); //позиция точки наблюдения
 
-
-
-
-            
-
-            var posCenter = mCamera.ScreenToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
-
-            var posDest = pos - posCenter;
+            var posDest = pos - posCenter; //вектор направления
+            var length = posDest.Length;
             posDest.Normalize();
-
-            var posB = posCenter + posDest;
-
-            var ptB = mCamera.WorldToScreenPoint(posB);
-            Vector2 ptA = new Vector2(0.5f, 0.5f);
+            var posAnhor = posCenter + posDest;
+            var ptAnhor = mCamera.WorldToScreenPoint(posAnhor); //положение метки
 
 
-            Vector2 pt = ptB;
+            var ptA     = mCamera.WorldToScreenPoint(pos);
+            var ptAS    = mCamera.WorldToScreenPoint(pos + mAnhor.Node.Scale);
+            float sizeObj = (ptAS - ptA).Length;
+
+            float scale = 1.0f;
+
+            if (    sizeObj > 0.1f &&
+                    ptA.X > 0 && ptA.Y > 0 && ptA.X < 1 && ptA.Y < 1
+                )
+            {
+                //скрыть
+                scale = 0.0f;
+            }
 
 
-            //Vector2 pt = MathHelperExt.intersect(ptB);
-
-            const float margin = 0.1f;
-            pt.X = MathHelper.Clamp(pt.X, margin, 1.0f - margin);
-            pt.Y = MathHelper.Clamp(pt.Y, margin, 1.0f - margin);
+      
 
 
 
-            var angle = Math.Atan2(pt.Y , pt.X) - Math.PI / 4;
+
+            const float margin = 0.01f;
+            ptAnhor.X = MathHelper.Clamp(ptAnhor.X, margin, 1.0f - margin);
+            ptAnhor.Y = MathHelper.Clamp(ptAnhor.Y, margin, 1.0f - margin);
+
+
+
+            var angle = Math.Atan2(ptAnhor.Y , ptAnhor.X);
 
             var sizeScreen = Root.Size;
-            Position =  new IntVector2((int)(pt.X * sizeScreen.X), (int)(pt.Y * sizeScreen.Y));
+            Position =  new IntVector2((int)(ptAnhor.X * sizeScreen.X), (int)(ptAnhor.Y * sizeScreen.Y));
 
-            //Position = new IntVector2(sizeScreen.X / 2, sizeScreen.Y / 2);
+
             Rotation = (float)((angle * 180.0f) / Math.PI);
 
-            //Console.WriteLine(ptB);
+            SetScale(scale);
     
         }
         ///--------------------------------------------------------------------

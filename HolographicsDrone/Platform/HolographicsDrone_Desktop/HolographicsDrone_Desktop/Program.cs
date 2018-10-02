@@ -290,6 +290,7 @@ namespace HolographicsDrone
                 drone.CreateComponent<ADrone>(); //сам дрон, мозги
                 drone.CreateComponent<ADroneModel>(); //модель дрона
                 drone.CreateComponent<AControlGamePad>(); //управление дроном через клаву
+                drone.CreateComponent<AControlKeyboard>();
                 drone.CreateComponent<AMarkerAnhor>(); //якорь указывающий где находится дрон
 
                 drone.Position = new Vector3(0, 5, -6.0f);
