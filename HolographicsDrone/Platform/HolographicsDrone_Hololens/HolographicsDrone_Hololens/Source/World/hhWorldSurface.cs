@@ -111,7 +111,7 @@ namespace HolographicsDrone.World
         {
             get
             {
-                return new Vector3(20, 10, 20);
+                return new Vector3(22, 12, 22);
             }
         }
         ///--------------------------------------------------------------------
@@ -326,14 +326,14 @@ namespace HolographicsDrone.World
         /// </summary>
         ///
         ///--------------------------------------------------------------------
-        private void createEnvironment()
+        public void createEnvironment()
         {
             mEnvironmentNode = Node.CreateChild("EnvironmentNode");
 
 
             //создадим стенки
             var size = sizeBox;
-            const float depth = 0.1f; //размерность толщина стенки
+            const float depth = 1.0f; //размерность толщина стенки
             const float top = 2.0f;
             createHate("hateDown",  new Vector3(0, -top, 0),  new Vector3(size.X, depth, size.Z), Color.Gray);
             createHate("hateUp",    new Vector3(0, sizeBox.Y -top, 0),   new Vector3(size.X, depth, size.Z), Color.Blue);

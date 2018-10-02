@@ -83,9 +83,10 @@ namespace HolographicsDrone.GUI
             AddChild(mLabelPID);
 
 
-            Application.Current.Engine.SubscribeToPostUpdate(args=> { onUpdate(args.TimeStep); });
+            //Application.Current.Engine.SubscribeToPostUpdate(args=> { onUpdate(args.TimeStep); });
+            Application.Current.Engine.PostUpdate += (args => { onUpdate(args.TimeStep); });
 
-           }
+        }
         ///--------------------------------------------------------------------
 
 

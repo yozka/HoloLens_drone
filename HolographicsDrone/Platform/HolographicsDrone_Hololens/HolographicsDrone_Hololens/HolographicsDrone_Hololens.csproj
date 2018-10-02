@@ -66,7 +66,10 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Source\Devices\hdBluetoothDevice_futaba.cs" />
+    <Compile Include="Source\Devices\hdBluetoothDevice_xbox.cs" />
     <Compile Include="Source\Devices\hdBluetoothJoy.cs" />
+    <Compile Include="Source\Devices\hdBluetoothDevice.cs" />
     <Compile Include="Source\Devices\hdControlBluetoothJoy.cs" />
     <Compile Include="Source\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

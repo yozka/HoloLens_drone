@@ -32,7 +32,7 @@ namespace HolographicsDrone.Drone
         private ADroneModel mModel = null;
 
 
-        private float mThrottleIncrease = 10.0f;
+        private float mThrottleIncrease = 2.0f;
         ///-------------------------------------------------------------------
 
 
@@ -162,9 +162,6 @@ namespace HolographicsDrone.Drone
         }
         ///--------------------------------------------------------------------
 
-        float mass = 0.5f;
-
-        float time = 0;
 
         bool ok = true;
 

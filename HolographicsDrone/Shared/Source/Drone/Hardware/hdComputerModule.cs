@@ -29,9 +29,9 @@ namespace HolographicsDrone.Drone.Hardware
         private const float iFactor = 5.0f;     //5.0f
         private const float dFactor = 0.05f;    //0.05f
 
-        private const float         pitchLimit = 45; //0..90
-        private const float         rollLimit  = 45; //0..90
-        private const float         yawLimit = 45; //0..90
+        private const float         pitchLimit  = 30; //0..90
+        private const float         rollLimit   = 30; //0..90
+        private const float         yawLimit    = 30; //0..90
 
 
         private const float pidMax = 90;

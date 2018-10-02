@@ -7,7 +7,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DeviceId>4CE3B45E-0530-04A7-0B7F-F404E7D5D220</DeviceId>
     <UseEmulator>false</UseEmulator>
-    <RemoteDebugMachine>192.168.1.101</RemoteDebugMachine>
+    <RemoteDebugMachine>192.168.0.45</RemoteDebugMachine>
     <AuthenticationMode>Universal</AuthenticationMode>
     <RemoteDebugEnabled>true</RemoteDebugEnabled>
   </PropertyGroup>

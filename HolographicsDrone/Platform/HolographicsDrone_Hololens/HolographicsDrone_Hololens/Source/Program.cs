@@ -15,7 +15,6 @@ using Windows.Media.MediaProperties;
 
 
 
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -163,12 +162,12 @@ namespace HolographicsDrone
 
             //
 
-            //scenario.home();
+         
 
 
 
-           
-          
+
+
 
 
 
@@ -179,7 +178,10 @@ namespace HolographicsDrone
 
 
             //запуск, сначало стартуем сканирование
-            world.startScanning();
+
+            world.createEnvironment();
+            scenario.home();
+            //world.startScanning();
         }
         ///--------------------------------------------------------------------
 
