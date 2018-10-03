@@ -129,8 +129,14 @@ namespace HolographicsDrone.Scenario
         public void home()
         {
             createDrone();
-            mDrone.Position = new Vector3(0.0f, 1.0f, 0.0f);
 
+            var droneCore = mDrone.GetComponent<ADrone>();
+            if (droneCore != null)
+            {
+                droneCore.reset();
+            }
+
+            mDrone.Position = new Vector3(0.0f, 1.0f, 1.0f);
         }
         ///--------------------------------------------------------------------
 

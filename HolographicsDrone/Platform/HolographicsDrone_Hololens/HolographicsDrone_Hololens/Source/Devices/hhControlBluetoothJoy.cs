@@ -82,7 +82,7 @@ namespace HolographicsDrone.Drone
                 return;
             }
 
-            var joy = mJoy.joy(EType.futaba);
+            var joy = mJoy.joy(EType.xbox);
             if (joy == null)
             {
                 joy = mJoy.joy(0);

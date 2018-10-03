@@ -70,7 +70,7 @@ namespace HolographicsDrone.Drone.Hardware
 
 
 
-        ///-------------------------------------------------------------------
+         ///-------------------------------------------------------------------
         ///
         /// <summary>
         /// Обновление системы
@@ -116,11 +116,7 @@ namespace HolographicsDrone.Drone.Hardware
             mVelocityVector = drone.model.rigidBody.LinearVelocity;
             mVelocityScalar = mVelocityVector.LengthSquared;
 
-            String sv = "Pitch: " + mGyroPitch.ToString("0.0000") + "\t ";
-            sv += "Yaw: " + mGyroYaw.ToString("0.0000") + "\t ";
-            sv += "Roll: " + mGyroRoll.ToString("0.0000");
-
-           // Console.WriteLine(sv);
+           
 
         }
         ///--------------------------------------------------------------------
@@ -199,17 +195,12 @@ namespace HolographicsDrone.Drone.Hardware
         ///--------------------------------------------------------------------
         public float normalYaw(float val)
         {
-            if (val > 90 && val < 270)
-            {
-                val -= 180;
-            }
-
-            if (val > 270 && val < 360)
+   
+            if (val > 180)
             {
                 val -= 360;
             }
-
-
+   
             return val;
         }
         ///--------------------------------------------------------------------

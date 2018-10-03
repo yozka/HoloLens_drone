@@ -169,10 +169,10 @@ namespace HolographicsDrone
 
             //запуск, сначало стартуем сканирование
 
-            world.createEnvironment();
-            scenario.home();
+            //world.createEnvironment();
+            //scenario.home();
 
-            //world.startScanning();
+            world.startScanning();
         }
         ///--------------------------------------------------------------------
 

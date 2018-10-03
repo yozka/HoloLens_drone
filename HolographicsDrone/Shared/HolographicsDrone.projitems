@@ -9,7 +9,6 @@
     <Import_RootNamespace>HolographicsDrone</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Data\Models\" />
     <Folder Include="$(MSBuildThisFileDirectory)Data\Techniques\" />
   </ItemGroup>
   <ItemGroup>
@@ -41,5 +40,10 @@
     <Content Include="$(MSBuildThisFileDirectory)Data\Textures\scanning_grid.dds">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Data\Models\drone.mdl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

@@ -20,6 +20,8 @@ namespace HolographicsDrone.Drone.Hardware
     public class AControlSignal
 
     {
+        //MathHelper.Clamp(value, -1.0f, 1.0f);
+
         ///-------------------------------------------------------------------
         public float throttle       { get; set; }   //газ
         public float rudder         { get; set; }   //рысканье YAW

@@ -59,7 +59,7 @@ namespace HolographicsDrone.GUI
 
             // Set random color and additive blending mode
             SetColor(Color.Red);
-            BlendMode = BlendMode.MaxBlendmodes;
+            BlendMode = BlendMode.Addalpha;
         }
         ///--------------------------------------------------------------------
 
@@ -91,16 +91,16 @@ namespace HolographicsDrone.GUI
             posDest.Normalize();
             var posAnhor = posCenter + posDest;
             var ptAnhor = mCamera.WorldToScreenPoint(posAnhor); //положение метки
-
+            
 
             var ptA     = mCamera.WorldToScreenPoint(pos);
             var ptAS    = mCamera.WorldToScreenPoint(pos + mAnhor.Node.Scale);
             float sizeObj = (ptAS - ptA).Length;
 
             float scale = 1.0f;
-
+            float marginDirect = 0.1f;
             if (    sizeObj > 0.1f &&
-                    ptA.X > 0 && ptA.Y > 0 && ptA.X < 1 && ptA.Y < 1
+                    ptA.X > marginDirect && ptA.Y > marginDirect && ptA.X < 1 - marginDirect && ptA.Y < 1 - marginDirect
                 )
             {
                 //скрыть
@@ -117,10 +117,11 @@ namespace HolographicsDrone.GUI
             ptAnhor.X = MathHelper.Clamp(ptAnhor.X, margin, 1.0f - margin);
             ptAnhor.Y = MathHelper.Clamp(ptAnhor.Y, margin, 1.0f - margin);
 
+            var ptDest = ptAnhor - new Vector2(0.5f, 0.5f);
 
+            var angle = Math.Atan2(ptDest.Y , ptDest.X) + Math.PI / 2;
 
-            var angle = Math.Atan2(ptAnhor.Y , ptAnhor.X);
-
+     
             var sizeScreen = Root.Size;
             Position =  new IntVector2((int)(ptAnhor.X * sizeScreen.X), (int)(ptAnhor.Y * sizeScreen.Y));
 

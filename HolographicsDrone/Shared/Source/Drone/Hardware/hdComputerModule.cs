@@ -8,7 +8,7 @@ using Urho;
 namespace HolographicsDrone.Drone.Hardware
 {
     ///-------------------------------------------------------------------
-    //using PidController;
+
     ///-------------------------------------------------------------------
 
 
@@ -34,21 +34,15 @@ namespace HolographicsDrone.Drone.Hardware
         private const float         yawLimit    = 30; //0..90
 
 
-        private const float pidMax = 90;
-        private const float pidMin = -90;
 
 
        
         public readonly APID        pidThrottle     = new APID(1.00f, 0.1f, 0.05f);
         public readonly APID        pidPitch        = new APID(pFactor, iFactor, dFactor);
         public readonly APID        pidRoll         = new APID(pFactor, iFactor, dFactor);
-        public readonly APID        pidYaw          = new APID(1.00f, 0.1f, 0.05f);
+        public readonly APID        pidYaw          = new APID(0.5f, 0.01f, 0.05f);
 
-        /*
-    public readonly PidController pidThrottle   = new PidController(1.0f, 0.1f, 0.05f,         10, -10);
-    public readonly PidController pidPitch      = new PidController(pFactor, iFactor, dFactor,  pidMax, pidMin);
-    public readonly PidController pidRoll       = new PidController(pFactor, iFactor, dFactor,  pidMax, pidMin);
-    */
+
 
         public readonly ABasicGyro  gyro            = new ABasicGyro();
 
@@ -58,7 +52,7 @@ namespace HolographicsDrone.Drone.Hardware
         public double rollCorrection;
         public double heightCorrection;
 
-        public double yawCorrection;
+        public double yawCorrection = 0.0f;
 
         public void updateGyro(ADrone drone)
         {
@@ -79,19 +73,13 @@ namespace HolographicsDrone.Drone.Hardware
             yawCorrection       = pidYaw        .update(controlYaw * yawLimit, gyro.yaw, timeFrame);
 
 
-            /*
-            TimeSpan time = TimeSpan.FromSeconds(timeFrame);
 
-            pitchCorrection     = pidPitch.update(controlPitch * pitchLimit, gyro.pitch, time);
-            rollCorrection      = pidRoll.update(gyro.roll, controlRoll * rollLimit, time);
-            heightCorrection    = pidThrottle.update(controlHeight, gyro.velocityVector.Y, time);
-            */
 
-            //yawCorrection = controlYaw * timeFrame;
+            //yawCorrection += controlYaw * yawLimit * timeFrame;
 
 
             //
-            
+            //yawCorrection = 0;
 
         }
 

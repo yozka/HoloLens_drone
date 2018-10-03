@@ -141,10 +141,16 @@ namespace HolographicsDrone.Drone
 
             //тело
             var nodeBody = main.CreateChild("body");
+            /*
             var body = nodeBody.CreateComponent<Box>();
             body.Color = Color.Blue;
             nodeBody.Scale = new Vector3(0.4f, 0.1f, 0.4f); //Ширина, Высота, длина
+            */
 
+            var model = Application.Current.ResourceCache.GetModel("Models/drone.mdl");
+            var bodyStaticModel = nodeBody.CreateComponent<StaticModel>();
+            bodyStaticModel.Model = model;
+            nodeBody.SetScale(0.04f);
    
 
 
