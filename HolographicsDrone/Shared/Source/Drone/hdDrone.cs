@@ -177,17 +177,24 @@ namespace HolographicsDrone.Drone
             Node.Position = Vector3.Zero;
             Node.Rotation = new Quaternion(x: 0, y: 0, z: 0);
 
+            if (mModel == null)
+            {
+                return;
+            }
+
             var rb = mModel.rigidBody;
-            var mass = rb.Mass;
-            rb.SetLinearVelocity(Vector3.Zero);
-            rb.SetAngularVelocity(Vector3.Zero);
+            if (rb != null)
+            {
+                var mass = rb.Mass;
+                rb.SetLinearVelocity(Vector3.Zero);
+                rb.SetAngularVelocity(Vector3.Zero);
 
-            
-            
-            rb.ResetToDefault();
-            rb.ResetForces();
-            rb.Mass = mass;
 
+
+                rb.ResetToDefault();
+                rb.ResetForces();
+                rb.Mass = mass;
+            }
             mComputer.reset();
         }
         ///--------------------------------------------------------------------

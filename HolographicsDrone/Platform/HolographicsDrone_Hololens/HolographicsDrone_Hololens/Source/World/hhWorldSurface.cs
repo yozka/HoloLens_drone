@@ -237,7 +237,7 @@ namespace HolographicsDrone.World
             }
 
             signal_startScanning?.Invoke();
-            await signal_startSpatialMapping?.Invoke(extents, 1000, default(Color), true, false);
+            await signal_startSpatialMapping?.Invoke(extents, 500, default(Color), true, false);
         }
         ///--------------------------------------------------------------------
 

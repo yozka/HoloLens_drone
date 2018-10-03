@@ -150,7 +150,7 @@ namespace HolographicsDrone.Drone
             var model = Application.Current.ResourceCache.GetModel("Models/drone.mdl");
             var bodyStaticModel = nodeBody.CreateComponent<StaticModel>();
             bodyStaticModel.Model = model;
-            nodeBody.SetScale(0.04f);
+            //nodeBody.SetScale(0.04f);
    
 
 
@@ -225,9 +225,9 @@ namespace HolographicsDrone.Drone
         private Node createMotor(Vector3 pos, Node parent, Color color)
         {
             var node = parent.CreateChild("MotorRotor");
-            var rotor = node.CreateComponent<Box>();
-            
 
+            
+            var rotor = node.CreateComponent<Box>();
             rotor.Color = color * 0.8f;
 
             node.Position = pos;

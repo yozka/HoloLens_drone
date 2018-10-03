@@ -79,7 +79,7 @@ namespace HolographicsDrone.Drone.Hardware
 
 
             //
-            //yawCorrection = 0;
+            yawCorrection = 0;
 
         }
 
