@@ -163,16 +163,16 @@ namespace HolographicsDrone
             //
 
          
-            //Scene.GetOrCreateComponent<DebugRenderer>();Engine.PostRenderUpdate += debugRender;
+           // Scene.GetOrCreateComponent<DebugRenderer>();Engine.PostRenderUpdate += debugRender;
 
 
 
             //запуск, сначало стартуем сканирование
 
-            world.createEnvironment();
-            scenario.home();
+            //world.createEnvironment();
+            //scenario.home();
 
-            //world.startScanning();
+            world.startScanning();
         }
         ///--------------------------------------------------------------------
 

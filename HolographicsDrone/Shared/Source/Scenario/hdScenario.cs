@@ -89,7 +89,7 @@ namespace HolographicsDrone.Scenario
             }
 
             mDrone = Scene.CreateChild("drone");
-            mDrone.SetScale(0.2f); //D=30cm
+            mDrone.SetScale(0.25f);
 
             mDrone.CreateComponent<ADrone>(); //модель дрона
             mDrone.CreateComponent<ADroneModel>(); //модель дрона
@@ -119,7 +119,7 @@ namespace HolographicsDrone.Scenario
 
 
 
-        ///-------------------------------------------------------------------
+         ///-------------------------------------------------------------------
         ///
         /// <summary>
         /// переход в домашнию точку
@@ -133,10 +133,17 @@ namespace HolographicsDrone.Scenario
             var droneCore = mDrone.GetComponent<ADrone>();
             if (droneCore != null)
             {
-                //droneCore.reset();
+                droneCore.reset();
             }
 
-            mDrone.Position = new Vector3(0.0f, 1.0f, 1.0f);
+            var pos = new Vector3(0.0f, 0.0f, 0.5f);
+            var camera = Node.Scene.GetComponent<Camera>(true);
+            if (camera != null)
+            {
+                pos = camera.ScreenToWorldPoint(new Vector3(0.5f, 0.5f, 1.0f)); //позиция точки наблюдения
+            }
+
+            mDrone.Position = pos;
         }
         ///--------------------------------------------------------------------
 

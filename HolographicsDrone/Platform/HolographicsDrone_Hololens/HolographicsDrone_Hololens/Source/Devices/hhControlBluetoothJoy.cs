@@ -102,12 +102,7 @@ namespace HolographicsDrone.Drone
             signal.elevator     = zero(elevator);
 
 
-            /*
-            signal.throttle     = zero(0);
-            signal.rudder       = zero(0);
-            signal.aileron      = zero(0);
-            signal.elevator     = zero(0);
-            */
+ 
         }
         ///--------------------------------------------------------------------
 

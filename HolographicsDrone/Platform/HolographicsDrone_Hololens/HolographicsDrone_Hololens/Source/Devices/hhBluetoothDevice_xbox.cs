@@ -137,7 +137,7 @@ namespace HolographicsDrone.Device
 
             mAxis[0] = parseData(1, 2);
             mAxis[1] = parseData(3, 4) * -1.0f;
-            mAxis[2] = parseData(5, 6);
+            mAxis[2] = parseData(5, 6) * -1.0f;
             mAxis[3] = parseData(7, 8) * -1.0f;
             mAxis[4] = parseData(9, 10);
 

@@ -31,7 +31,8 @@ namespace HolographicsDrone.Drone
                 Component
     {
         ///-------------------------------------------------------------------
-        private readonly Dictionary<EMotor, Node>    mMotors = new Dictionary<EMotor, Node>();
+        private readonly Dictionary<EMotor, Node>   mMotors = new Dictionary<EMotor, Node>();
+        private readonly Dictionary<EMotor, float>  mSpeed  = new Dictionary<EMotor, float>(); //скорость пропеллеров
         private RigidBody mRigidBody = null; //физическая модель квадракоптера
         ///-------------------------------------------------------------------
 
@@ -47,6 +48,7 @@ namespace HolographicsDrone.Drone
         ///--------------------------------------------------------------------
         public ADroneModel()
         {
+            ReceiveSceneUpdates = true;
 
         }
         ///--------------------------------------------------------------------
@@ -90,6 +92,21 @@ namespace HolographicsDrone.Drone
 
 
 
+        
+         ///-------------------------------------------------------------------
+        ///
+        /// <summary>
+        /// устанавливаем скорость вращение винтов
+        /// </summary>
+        ///
+        ///--------------------------------------------------------------------
+        public void setSpeedPropeller(EMotor type, float speed)
+        {
+            mSpeed[type] = speed;
+        }
+        ///--------------------------------------------------------------------
+
+
 
 
 
@@ -123,91 +140,45 @@ namespace HolographicsDrone.Drone
             //var main    = Node.CreateChild();
             Node main = Node;
 
-            //var mainBox = main.CreateComponent<Box>();
-            //mainBox.Color = Color.Blue * 0.3f;
-          
+            /*
+            var mainBox = main.CreateComponent<Box>();
+            mainBox.Color = Color.Blue;
+            */
             
             //физика
             mRigidBody = main.CreateComponent<RigidBody>();
-            
+            mRigidBody.RollingFriction = 100.0f;
+            mRigidBody.Friction = 100.0f;
 
 
             mRigidBody.Mass = 1.0f;
             
 
             CollisionShape shape = main.CreateComponent<CollisionShape>();
-            shape.SetBox(new Vector3(1.0f, 0.1f, 1.0f), Vector3.Zero, Quaternion.Identity);
+            shape.SetBox(new Vector3(1.0f, 0.5f, 1.0f), new Vector3(0.0f, -0.15f, 0.0f), Quaternion.Identity);
 
 
             //тело
             var nodeBody = main.CreateChild("body");
-            /*
-            var body = nodeBody.CreateComponent<Box>();
-            body.Color = Color.Blue;
-            nodeBody.Scale = new Vector3(0.4f, 0.1f, 0.4f); //Ширина, Высота, длина
-            */
-
             var model = Application.Current.ResourceCache.GetModel("Models/drone.mdl");
             var bodyStaticModel = nodeBody.CreateComponent<StaticModel>();
             bodyStaticModel.Model = model;
-            //nodeBody.SetScale(0.04f);
-   
+  
 
 
 
             //винты
-            const float shift = 0.4f;
-            const float top = 0.03f;
+            const float shift = 0.444f;
+            const float top = 0.05f;
 
-            /*
-            mMotors[EMotor.frontLeft]   = createMotor(new Vector3(-shift,  top,  shift),    main, Color.Green);
-            mMotors[EMotor.frontRight]  = createMotor(new Vector3( shift,  top,  shift),    main, Color.Red);
-            mMotors[EMotor.rearLeft]    = createMotor(new Vector3(-shift,  top, -shift),    main, Color.Yellow);
-            mMotors[EMotor.rearRight]   = createMotor(new Vector3( shift,  top, -shift),    main, Color.Blue);
-
-            */
+    
             mMotors[EMotor.frontLeft]   = createMotor(new Vector3(-shift, top, shift), main, Color.Green);
             mMotors[EMotor.frontRight]  = createMotor(new Vector3( shift, top, shift), main, Color.Red);
             mMotors[EMotor.rearLeft]    = createMotor(new Vector3(-shift, top, -shift), main, Color.Yellow);
             mMotors[EMotor.rearRight]   = createMotor(new Vector3( shift, top, -shift), main, Color.Blue);
 
 
-            /*
-                        RigidBody rb = r4.CreateComponent<RigidBody>();
-                        rb.Mass = 1.0f;
-                        rb.Friction = 0.75f;
-                        CollisionShape shape = r4.CreateComponent<CollisionShape>();
-                        shape.SetBox(Vector3.One, Vector3.Zero, Quaternion.Identity);
-
-
-                        var c4 = nodeBody.CreateComponent<Constraint>();
-                        c4.OtherBody = rb;
-                        c4.Position = r4.Position;
-                        c4.ConstraintType = ConstraintType.Slider;
-                        test = rb;
-                        */
-
-            /*
-            rb = r1.CreateComponent<RigidBody>();
-            rb.Mass = 1.0f;
-            rb.Friction = 0.75f;
-            shape = r1.CreateComponent<CollisionShape>();
-            shape.SetBox(Vector3.One, Vector3.Zero, Quaternion.Identity);
-
-            var c1 = nodeBody.CreateComponent<Constraint>();
-            c1.OtherBody = rb;
-            c1.Position = r1.Position;
-            */
-
-            //var cache = Application.ResourceCache;
-            //var nodeBody = Node.CreateChild();
-            //var modelBody = nodeBody.CreateComponent<StaticModel>();
-            //modelBody.Model = cache.GetModel("Models/Mutant.mdl");
-
-
-
-            //Model = cache.GetModel("Models/Mutant.mdl");
-            //SetMaterial(cache.GetMaterial("robot.xml"));
+          
         }
         ///--------------------------------------------------------------------
 
@@ -215,7 +186,7 @@ namespace HolographicsDrone.Drone
 
 
 
-        ///-------------------------------------------------------------------
+         ///-------------------------------------------------------------------
         ///
         /// <summary>
         /// система создание модели
@@ -228,10 +199,10 @@ namespace HolographicsDrone.Drone
 
             
             var rotor = node.CreateComponent<Box>();
-            rotor.Color = color * 0.8f;
+            rotor.Color = color;
 
             node.Position = pos;
-            node.Scale = new Vector3(0.4f, 0.05f, 0.4f); //Ширина, Высота, длина
+            node.Scale = new Vector3(0.05f, 0.01f, 0.6f); //Ширина, Высота, длина
   
             return node;
         }
@@ -242,8 +213,25 @@ namespace HolographicsDrone.Drone
 
 
 
+         ///-------------------------------------------------------------------
+        ///
+        /// <summary>
+        /// 
+        /// </summary>
+        ///
+        ///--------------------------------------------------------------------
+        protected override void OnUpdate(float timeStep)
+        {
+            foreach (var key in mSpeed.Keys)
+            {
+                float speed = mSpeed[key];
+                var motor = mMotors[key];
+                motor.Rotate(new Quaternion(0, speed * 20.0f * timeStep, 0));
+            }
 
 
+        }
+        ///--------------------------------------------------------------------
 
 
 

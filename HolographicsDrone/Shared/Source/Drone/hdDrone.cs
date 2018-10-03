@@ -32,7 +32,7 @@ namespace HolographicsDrone.Drone
         private ADroneModel mModel = null;
 
 
-        private float mThrottleIncrease = 2.0f;
+   
         ///-------------------------------------------------------------------
 
 
@@ -177,23 +177,21 @@ namespace HolographicsDrone.Drone
             Node.Position = Vector3.Zero;
             Node.Rotation = new Quaternion(x: 0, y: 0, z: 0);
 
-            if (mModel == null)
+            if (mModel != null)
             {
-                return;
-            }
-
-            var rb = mModel.rigidBody;
-            if (rb != null)
-            {
-                var mass = rb.Mass;
-                rb.SetLinearVelocity(Vector3.Zero);
-                rb.SetAngularVelocity(Vector3.Zero);
+                var rb = mModel.rigidBody;
+                if (rb != null)
+                {
+                    var mass = rb.Mass;
+                    rb.SetLinearVelocity(Vector3.Zero);
+                    rb.SetAngularVelocity(Vector3.Zero);
 
 
 
-                rb.ResetToDefault();
-                rb.ResetForces();
-                rb.Mass = mass;
+                    rb.ResetToDefault();
+                    rb.ResetForces();
+                    rb.Mass = mass;
+                }
             }
             mComputer.reset();
         }
@@ -225,10 +223,11 @@ namespace HolographicsDrone.Drone
             float time = timeStep;//MathHelper.Clamp(timeStep, 0.001f, 0.01f);
                                   //Console.WriteLine(time);
 
+
             mComputer.updateGyro(this);
             mComputer.updateComputer(mControlSignal.pitch,
                                         mControlSignal.roll,
-                                        mControlSignal.throttle * mThrottleIncrease,
+                                        mControlSignal.throttle,
                                         mControlSignal.yaw,
                                         time);
             computeMotors(time);
@@ -243,21 +242,34 @@ namespace HolographicsDrone.Drone
 
 
 
-        private void motorForce(EMotor tp, double power)
+         ///-------------------------------------------------------------------
+        ///
+        /// <summary>
+        /// просчет нагрузки на моторы
+        /// </summary>
+        ///
+        ///--------------------------------------------------------------------
+        private void motorForce(EMotor tp, double power, float speedPropeller)
         {
-            var rb = mModel.rigidBody;
-            var motor = mModel.motor(tp);
-            var thrust = motor.WorldUp;
-            var posA = motor.WorldPosition;
-            var posB = Node.WorldPosition;
-            var pos = posA - posB;
+            var rb      = mModel.rigidBody;
+            var motor   = mModel.motor(tp);
+            var thrust  = motor.WorldUp;
+            var posA    = motor.WorldPosition;
+            var posB    = Node.WorldPosition;
+            var pos     = posA - posB;
             pos.Y = 0;
             rb.ApplyImpulse(thrust * (float)power, pos);
+
+            //раскручиваем пропеллер
+            mModel.setSpeedPropeller(tp, speedPropeller);
         }
+        ///--------------------------------------------------------------------
 
 
 
-         ///-------------------------------------------------------------------
+
+
+        ///-------------------------------------------------------------------
         ///
         /// <summary>
         /// просчет нагрузки на моторы
@@ -275,7 +287,7 @@ namespace HolographicsDrone.Drone
                 motor.updateForceValues(mComputer, timeStep);
                 yaw += motor.sideForce;
 
-                motorForce(motor.typeMotor, motor.upForce);
+                motorForce(motor.typeMotor, motor.upForce, motor.speedPropeller);
             }
 
             const float zeroYaw = 0.001f;

@@ -29,7 +29,7 @@ namespace HolographicsDrone.World
          Component
     {
         ///-------------------------------------------------------------------
-        private const int   cTimeScanning       = 1000 * 20; //общее время сканирования
+        private const int   cTimeScanning       = 1000 * 10; //общее время сканирования
 
 
         private Node        mEnvironmentNode    = null;
@@ -181,8 +181,8 @@ namespace HolographicsDrone.World
             {
                 staticModel.SetMaterial(mMaterialScene);
                 var rigidBody = node.CreateComponent<RigidBody>();
-                rigidBody.RollingFriction = 0.5f;
-                rigidBody.Friction = 0.5f;
+                rigidBody.RollingFriction = 1.0f;
+                rigidBody.Friction = 1.0f;
                 var collisionShape = node.CreateComponent<CollisionShape>();
                 collisionShape.SetTriangleMesh(generatedModel, 0, Vector3.One, Vector3.Zero, Quaternion.Identity);
             }
@@ -237,6 +237,7 @@ namespace HolographicsDrone.World
             }
 
             signal_startScanning?.Invoke();
+
             await signal_startSpatialMapping?.Invoke(extents, 500, default(Color), true, false);
         }
         ///--------------------------------------------------------------------

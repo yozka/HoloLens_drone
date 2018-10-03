@@ -60,7 +60,7 @@ namespace HolographicsDrone.Drone.Hardware
 
         public double mass = 0.0f;
 
-        public double speedPropeller = 0.0f;
+        public float  speedPropeller = 0.0f;
 
 
         public EMotor typeMotor     = EMotor.none;//тип мотора
@@ -90,13 +90,17 @@ namespace HolographicsDrone.Drone.Hardware
 
             upForce = upForceTotal;
 
+            if (computer.isStopMotor())
+            {
+                upForce = 0;
+            }
+
            // upForce = MathHelper.Lerp(upForceLast, upForceTotal, 0.5f);
 
             sideForce = preNormalize(computer.yawCorrection, yawFactor);
 
-            //speedPropeller = MathHelper.Lerp(speedPropeller, upForce * 2500.0f, timeFrame);
-
-
+            float speed = (float)upForce * 2500.0f * (invertDirection ? 1.0f : -1.0f);
+            speedPropeller = MathHelper.Lerp(speedPropeller, speed, timeFrame);
 
         }
         ///-------------------------------------------------------------------
