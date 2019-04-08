@@ -1,15 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DeviceId>4CE3B45E-0530-04A7-0B7F-F404E7D5D220</DeviceId>
+    <DeviceId>30F105C9-681E-420b-A277-7C086EAD8A4E</DeviceId>
     <UseEmulator>true</UseEmulator>
+    <RemoteDebugEnabled>false</RemoteDebugEnabled>
+    <RemoteDebugMachine>192.168.1.106</RemoteDebugMachine>
+    <AuthenticationMode>None</AuthenticationMode>
+    <CreateCleanLayout>true</CreateCleanLayout>
+    <AllowLocalNetworkLoopback>false</AllowLocalNetworkLoopback>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DeviceId>4CE3B45E-0530-04A7-0B7F-F404E7D5D220</DeviceId>
-    <UseEmulator>false</UseEmulator>
-    <RemoteDebugMachine>192.168.1.101</RemoteDebugMachine>
-    <AuthenticationMode>Universal</AuthenticationMode>
-    <RemoteDebugEnabled>true</RemoteDebugEnabled>
+    <DeviceId>30F105C9-681E-420b-A277-7C086EAD8A4E</DeviceId>
+    <UseEmulator>true</UseEmulator>
+    <RemoteDebugMachine>192.168.1.106</RemoteDebugMachine>
+    <AuthenticationMode>None</AuthenticationMode>
+    <RemoteDebugEnabled>false</RemoteDebugEnabled>
+    <CreateCleanLayout>true</CreateCleanLayout>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <DeviceId>30F105C9-681E-420b-A277-7C086EAD8A4E</DeviceId>

@@ -2170,7 +2170,7 @@
           }
         }
       },
-      "UrhoSharp.SharpReality/1.8.93": {
+      "UrhoSharp.SharpReality/1.9.67": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Urho.dll": {}
@@ -4440,7 +4440,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "UrhoSharp.SharpReality/1.8.93": {
+      "UrhoSharp.SharpReality/1.9.67": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Urho.dll": {}
@@ -6749,7 +6749,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "UrhoSharp.SharpReality/1.8.93": {
+      "UrhoSharp.SharpReality/1.9.67": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Urho.dll": {}
@@ -9019,7 +9019,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "UrhoSharp.SharpReality/1.8.93": {
+      "UrhoSharp.SharpReality/1.9.67": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Urho.dll": {}
@@ -11328,7 +11328,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "UrhoSharp.SharpReality/1.8.93": {
+      "UrhoSharp.SharpReality/1.9.67": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Urho.dll": {}
@@ -17145,25 +17145,27 @@
         "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll"
       ]
     },
-    "UrhoSharp.SharpReality/1.8.93": {
-      "sha512": "OuKGo0dBWqkBtd9a48WfqxMdtMtjbiz8V7+gLg9Wd3Y3+PjD28khN3FFFutErM/ZyZgIuCTnrfGGtPR33JCBwA==",
+    "UrhoSharp.SharpReality/1.9.67": {
+      "sha512": "A0UDubI3mrYouI8tL/uozVejXT7ljq15J4SvbnqwptnrBQuQD0BbiuqiJ6OqosMzs+dqIJpOvkDMJ46Lf1KM7Q==",
       "type": "package",
+      "path": "UrhoSharp.SharpReality/1.9.67",
       "files": [
+        ".signature.p7s",
+        "UrhoSharp.SharpReality.1.9.67.nupkg.sha512",
+        "UrhoSharp.SharpReality.nuspec",
         "build/uap10.0/UrhoSharp.SharpReality.targets",
         "lib/uap10.0/Urho.XML",
         "lib/uap10.0/Urho.dll",
         "native/CoreData.pak",
         "native/SharpReality32/mono-holourho.dll",
-        "native/SharpReality64/mono-holourho.dll",
-        "urhosharp.sharpreality.1.8.93.nupkg.sha512",
-        "urhosharp.sharpreality.nuspec"
+        "native/SharpReality64/mono-holourho.dll"
       ]
     }
   },
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.2.6",
-      "UrhoSharp.SharpReality >= 1.8.93"
+      "UrhoSharp.SharpReality >= 1.9.67"
     ],
     "UAP,Version=v10.0": []
   },
